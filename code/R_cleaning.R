@@ -24,11 +24,11 @@ bundestag_long |>
            ),
          alpha = case_when(
            party == "CDU/CSU" ~ 0.5,
-           party == "SPD" ~ 0.7,
+           party == "SPD" ~ 0.9,
            party == "FDP" ~ 0.9,
            party == "Linke⁠"~ 0.9,
            party == "AfD" ~ 0.9,
-           party == "Grüne⁠" ~ "#408960",
+           party == "Grüne⁠" ~ 0.9,
            TRUE ~ NA
          )) ->
   bundestag_clean
