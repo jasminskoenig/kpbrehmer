@@ -17,7 +17,7 @@ bundestag_long |>
            party == "CDU/CSU" ~ "#312E2D",
            party == "SPD" ~ "#E0BBB3",
            party == "FDP" ~ "#F9D549",
-           party == "Linke⁠" ~ "#D23627",
+           party == "Linke⁠" ~ "#7b2cbf",
            party == "AfD" ~ "#6D4833",
            party == "Grüne⁠" ~ "#408960",
            TRUE ~ NA
