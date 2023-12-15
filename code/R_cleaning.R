@@ -30,7 +30,16 @@ bundestag_long |>
            party == "AfD" ~ 0.9,
            party == "Grüne⁠" ~ 0.9,
            TRUE ~ NA
-         )) ->
+         ),
+         angle = case_when(
+           party == "CDU/CSU" ~ 45,
+           party == "SPD" ~ 165,
+           party == "FDP" ~ 0,
+           party == "Linke" ~ 105,
+           party == "AfD" ~ 145,
+           party == "Grüne" ~ 70,
+           TRUE ~ NA
+         ) ->
   bundestag_clean
 
 write_rds(bundestag_clean, "data/bundestag_clean.rds")
