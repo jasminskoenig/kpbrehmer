@@ -12,6 +12,7 @@ bundestag_ergebnisse |>
   bundestag_long
 
 bundestag_long |> 
+  filter(result > 5) |> 
   mutate(party = str_remove(party, "\\d"),
          color = case_when(
            party == "CDU/CSU" ~ "#312E2D",
@@ -31,6 +32,15 @@ bundestag_long |>
            party == "Grüne⁠" ~ 0.9,
            TRUE ~ NA
          ),
+         alpha = case_when(
+           party == "CDU/CSU" ~ 45,
+           party == "SPD" ~ 165,
+           party == "FDP" ~ 0,
+           party == "Linke⁠"~109,
+           party == "AfD" ~ 145,
+           party == "Grüne⁠" ~79,
+           TRUE ~ NA
+         ),
          angle = case_when(
            party == "CDU/CSU" ~ 45,
            party == "SPD" ~ 165,
@@ -39,7 +49,7 @@ bundestag_long |>
            party == "AfD" ~ 145,
            party == "Grüne" ~ 70,
            TRUE ~ NA
-         ) ->
+         )) ->
   bundestag_clean
 
 write_rds(bundestag_clean, "data/bundestag_clean.rds")
