@@ -1,5 +1,5 @@
 library(tidyverse)
-library(readxl)
+library(readxl) 
 
 bundestag_ergebnisse <- read_excel("data/bundestag_ergebnisse.xlsx")
 
@@ -12,14 +12,16 @@ bundestag_ergebnisse |>
   bundestag_long
 
 bundestag_long |> 
-  filter(result > 5) |> 
+  filter(result > 5 | party == "Linke⁠"|party == "DP"|party=="Z" ) |> 
+  filter(!is.na(result)) |> 
   mutate(party = str_remove(party, "\\d"),
          color = case_when(
            party == "CDU/CSU" ~ "#4C5B5C",
            party == "SPD" ~ "#DB5461",
            party == "FDP" ~ "#FDE74C",
            party == "Linke⁠" ~ "#7b2cbf",
-           party == "AfD" ~ "#6D4833",
+           party == "Z" ~ "#3A4547",
+           party == "AfD" | party == "DP" ~ "#6D4833",
            party == "Grüne⁠" ~"#26A96C" ,
            TRUE ~ NA
            ),
