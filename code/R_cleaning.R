@@ -1,5 +1,6 @@
 library(tidyverse)
 library(readxl) 
+library(jsonlite)
 
 bundestag_ergebnisse <- read_excel("data/bundestag_ergebnisse.xlsx")
 
@@ -42,9 +43,14 @@ bundestag_long |>
            party == "AfD" ~ 145,
            party == "Grüne⁠" ~79,
            TRUE ~ NA
-         )) ->
+         ),
+         year = year(Wahltag)) ->
   bundestag_clean
 
 write_rds(bundestag_clean, "data/bundestag_clean.rds")
 write.csv(bundestag_clean, "data/bundestag_clean.csv")
+json_data <- toJSON(bundestag_clean, pretty=TRUE)
+
+write(json_data, file = "data/bundestag_clean.json")
+
 
